@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Home</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Blog</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/posts/new">Create New Post</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h1>Welcome to the Blog!</h1>
+    <p class="lead">Here you will find the latest posts.</p>
+
+    <div class="list-group">
+        <div class="list-group-item" th:each="post : ${posts}">
+            <h5 class="mb-1" th:text="${post.title}">Post Title</h5>
+            <p class="mb-1" th:text="${post.text}">Post Description</p>
+            <a th:href="@{/posts/{id}(id=${post.id})}" class="btn btn-primary">Read More</a>
+            <a th:href="@{/posts/edit/{id}(id=${post.id})}" class="btn btn-secondary">Edit</a>
+            <form th:action="@{/posts/delete/{id}(id=${post.id})}" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
